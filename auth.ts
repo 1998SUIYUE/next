@@ -7,7 +7,7 @@ import type { User } from "@/app/lib/definitions";
 import bcrypt from "bcrypt";
 console.log("NEXTAUTH_URL:", process.env.NEXTAUTH_URL);
 console.log("NODE_ENV:", process.env.NODE_ENV);
-console.log("NODE_secret:", process.env.NEXTAUTH_SECRET);
+console.log("NODE_secret:", process.env.NEXT_PUBLIC__SECRET);
 // async function getUser(email: string): Promise<User | undefined> {
 //   try {
 //     const result = await executeQuery(`SELECT * FROM users WHERE email=?`, [
@@ -35,7 +35,7 @@ export const { auth, signIn, signOut } = NextAuth({
   trustHost: true, // 添加这一行
   debug: true,
   useSecureCookies: false, // 如果不使用 HTTPS，设置为 false
-  secret:process.env.NEXTAUTH_SECRET,
+  // secret:process.env.NEXTAUTH_SECRET,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   
   providers: [
