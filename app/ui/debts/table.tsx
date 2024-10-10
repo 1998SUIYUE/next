@@ -66,7 +66,7 @@ export default function InvoicesTable({
       }
       setLoading(false);
       fetch(
-        `http://localhost:3000/api/debts?filter=${query}&page=${currentPage}&minAmount=${minAmount}&maxAmount=${maxAmount}&startDate=${startDate}&endDate=${endDate}`
+        `http://47.109.95.152:3000/api/debts?filter=${query}&page=${currentPage}&minAmount=${minAmount}&maxAmount=${maxAmount}&startDate=${startDate}&endDate=${endDate}`
       )
         .then((res) => {
           if (!res.ok) {

@@ -42,7 +42,7 @@ export default function ProductsTable({
       }
       //不允许加载
       setLoading(false);
-      fetch(`http://localhost:3000/api/products?filter=${query}&page=${currentPage}`)
+      fetch(`http://47.109.95.152:3000/api/products?filter=${query}&page=${currentPage}`)
         .then((res) => {
           if (!res.ok) {
             throw new Error(`错误: ${res.status}`);

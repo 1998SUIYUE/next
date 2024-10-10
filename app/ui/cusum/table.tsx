@@ -41,7 +41,7 @@ export default function OrdersTable({
     const loadOrders = () => {
       if (!loading) return;
       setLoading(false);
-      fetch(`http://localhost:3000/api/orders?filter=${query}&page=${currentPage}`)
+      fetch(`http://47.109.95.152:3000/api/orders?filter=${query}&page=${currentPage}`)
         .then((res) => {
           if (!res.ok) {
             throw new Error(`错误: ${res.status}`);
