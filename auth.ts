@@ -64,7 +64,6 @@ export const { auth, signIn, signOut } = NextAuth({
               return null;
             }
           }
-
           console.log("无效的凭据格式");
           return null;
         } catch (error) {
