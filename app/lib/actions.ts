@@ -102,7 +102,7 @@ export async function updateDebt(
     date: z.string(),
     payback: z.coerce
       .number()
-      .gt(0, { message: "请输入不小于 $0 的金额。" })
+      .gte(0, { message: "请输入不小于 $0 的金额。" })
       .refine(
         (val) => {
           const amount = Number(formData.get("receive"));
