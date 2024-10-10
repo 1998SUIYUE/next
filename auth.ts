@@ -81,7 +81,12 @@ export const { auth, signIn, signOut } = NextAuth({
         }
       },
     }),
+    
   ],
+  jwt: {
+    maxAge: 60 * 60 * 24 * 30, // 30 天
+  },
+
   events: {
     async signIn({ user, account, profile, isNewUser }) {
       console.log("登录事件触发");
@@ -92,4 +97,6 @@ export const { auth, signIn, signOut } = NextAuth({
     },
     // 移除 signOut 事件处理器
   },
+  //jwt
+  
 });
