@@ -5,7 +5,7 @@ const nextConfig = {
     ppr: 'incremental',
   },
   env: {
-    NEXTAUTH_URL: 'http://47.109.95.152:3000',
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     DB_HOST: process.env.DB_HOST,
     DB_USER: process.env.DB_USER,
     DB_PASSWORD: process.env.DB_PASSWORD,

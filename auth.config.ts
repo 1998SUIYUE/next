@@ -21,15 +21,5 @@ export const authConfig = {
       }
       return true;
     },
-    redirect({ url, baseUrl }) {
-      console.log("Redirect in auth.config", { url, baseUrl });
-       if (url.startsWith(baseUrl) || url.startsWith('http://47.109.95.152:3000')) {
-         console.log("Redirecting to:", url);
-         return url;
-       }
-       console.log("Redirecting to baseUrl:", baseUrl);
-       return baseUrl;
-    },
-    
   },
 } satisfies NextAuthConfig;

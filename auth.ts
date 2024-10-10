@@ -34,19 +34,7 @@ export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,
   trustHost: true, // 添加这一行
   debug: true,
-  
   useSecureCookies: false, // 如果不使用 HTTPS，设置为 false
-  cookies: {
-    sessionToken: {
-      name: `next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: false, // 如果不使用 HTTPS，设置为 false
-      },
-    },
-  },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   providers: [
     Credentials({
@@ -86,20 +74,6 @@ export const { auth, signIn, signOut } = NextAuth({
       },
     }),
   ],
-  callbacks: {
-    async jwt({ token, user }) {
-      console.log("生成 JWT");
-      console.log("Token:", JSON.stringify(token, null, 2));
-      console.log("User:", user ? JSON.stringify(user, null, 2) : "无用户信息");
-      return token;
-    },
-    async session({ session, token }) {
-      console.log("创建会话");
-      console.log("Session:", JSON.stringify(session, null, 2));
-      console.log("Token:", JSON.stringify(token, null, 2));
-      return session;
-    },
-  },
   events: {
     async signIn({ user, account, profile, isNewUser }) {
       console.log("登录事件触发");
