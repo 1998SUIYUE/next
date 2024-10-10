@@ -5,7 +5,7 @@ import { z } from "zod";
 
 import type { User } from "@/app/lib/definitions";
 import bcrypt from "bcrypt";
-console.log("NEXTAUTH_URL:", process.env.NEXTAUTH_URL);
+console.log("NEXTAUTH_URL:", process.env.NEXTAUTH_URL_INTERNAL);
 console.log("NODE_ENV:", process.env.NODE_ENV);
 console.log("ecret:", process.env.NEXT_PUBLIC__SECRET);
 // async function getUser(email: string): Promise<User | undefined> {
