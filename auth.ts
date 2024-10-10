@@ -7,7 +7,7 @@ import type { User } from "@/app/lib/definitions";
 import bcrypt from "bcrypt";
 console.log('NEXTAUTH_URL:', process.env.NEXTAUTH_URL);
 console.log('NODE_ENV:', process.env.NODE_ENV);
-
+console.log('NODE_secret:', process.env.NEXTAUTH_SECRET);
 async function getUser(email: string): Promise<User | undefined> {
   try {
     const result = await executeQuery(`SELECT * FROM users WHERE email=?`, [
