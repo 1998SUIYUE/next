@@ -35,7 +35,9 @@ export const { auth, signIn, signOut } = NextAuth({
   trustHost: true, // 添加这一行
   debug: true,
   useSecureCookies: false, // 如果不使用 HTTPS，设置为 false
+  secret:process.env.NEXTAUTH_SECRET,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  
   providers: [
     Credentials({
       async authorize(credentials) {
