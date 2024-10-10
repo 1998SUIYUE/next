@@ -5,7 +5,8 @@ import { z } from "zod";
 import { executeQuery } from "./app/lib/db";
 import type { User } from "@/app/lib/definitions";
 import bcrypt from "bcrypt";
-
+console.log('NEXTAUTH_URL:', process.env.NEXTAUTH_URL);
+console.log('NODE_ENV:', process.env.NODE_ENV);
 
 async function getUser(email: string): Promise<User | undefined> {
   try {
@@ -31,6 +32,8 @@ async function getUser(email: string): Promise<User | undefined> {
 
 export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,
+  trustHost: true,  // 添加这一行
+  debug: true, 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   providers: [
     Credentials({

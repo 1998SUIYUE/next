@@ -11,14 +11,19 @@ export const authConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
-      const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
+      const isOnDashboard = nextUrl.pathname.startsWith('http://47.109.95.152:3000/dashboard');
       if (isOnDashboard) {
         if (isLoggedIn) return true;
         return false; // Redirect unauthenticated users to login page
       } else if (isLoggedIn) {
-        return Response.redirect(new URL('/dashboard', nextUrl));
+        return Response.redirect(new URL(`http://47.109.95.152:3000/dashboard`, nextUrl));
       }
       return true;
+    },
+    redirect({ url, baseUrl }) {
+      if (url.startsWith(baseUrl)) return url;
+      else if (url.startsWith('http://47.109.95.152:3000')) return url;
+      return baseUrl;
     },
   },
 } satisfies NextAuthConfig;
