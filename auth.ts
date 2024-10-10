@@ -6,12 +6,13 @@ import { executeQuery } from "./app/lib/db";
 import type { User } from "@/app/lib/definitions";
 import bcrypt from "bcrypt";
 
-const NEXTAUTH_SECRET = "g8iUCgkLGstdGkxeJ+0cmY5HglYqAHJi9bHDPX8lSTw="
+
 async function getUser(email: string): Promise<User | undefined> {
   try {
     const result = await executeQuery(`SELECT * FROM users WHERE email=?`, [
       email,
     ]);
+    console.log("user---------------",result)
     if (Array.isArray(result) && result.length > 0) {
       const user: User = result[0] as User;
       return user;
@@ -31,8 +32,6 @@ async function getUser(email: string): Promise<User | undefined> {
 export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  
-  secret: NEXTAUTH_SECRET,
   providers: [
     Credentials({
       async authorize(credentials) {
@@ -43,7 +42,6 @@ export const { auth, signIn, signOut } = NextAuth({
           if (parsedCredentials.success) {
             const { email, password } = parsedCredentials.data;
             const user = await getUser(email);
-
             if (!user) {
               console.log("用户未找到，邮箱:", email);
               return null;
