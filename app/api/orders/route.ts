@@ -1,4 +1,4 @@
-import { getConnection, executeQuery } from "@/app/lib/db";
+import { pool,executeQuery } from "@/app/lib/db";
 import { ResultSetHeader} from "mysql2/promise";
 import mysql from 'mysql2/promise';
 
@@ -105,7 +105,7 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   let conn: mysql.PoolConnection | null = null;
   try {
-    conn = await getConnection();
+    conn = await pool.getConnection();
     await conn.beginTransaction();
 
     const body = await req.json();
