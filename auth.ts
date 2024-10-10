@@ -5,6 +5,7 @@ import { z } from "zod";
 import { executeQuery } from "./app/lib/db";
 import type { User } from "@/app/lib/definitions";
 import bcrypt from "bcrypt";
+
 const NEXTAUTH_SECRET = "g8iUCgkLGstdGkxeJ+0cmY5HglYqAHJi9bHDPX8lSTw="
 async function getUser(email: string): Promise<User | undefined> {
   try {
@@ -29,16 +30,16 @@ async function getUser(email: string): Promise<User | undefined> {
 
 export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  
   secret: NEXTAUTH_SECRET,
   providers: [
-    
     Credentials({
       async authorize(credentials) {
         try {
           const parsedCredentials = z
             .object({ email: z.string().email(), password: z.string().min(6) })
             .safeParse(credentials);
-
           if (parsedCredentials.success) {
             const { email, password } = parsedCredentials.data;
             const user = await getUser(email);
@@ -95,3 +96,5 @@ export const { auth, signIn, signOut } = NextAuth({
     // 移除 signOut 事件处理器
   },
 });
+
+

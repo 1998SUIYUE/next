@@ -17,8 +17,21 @@ export const pool = mysql.createPool({
 export async function executeQuery(query: string, values: any[] = []) {
   let connection;
   try {
+    const formattedQuery = query.replace(/\?/g, () => {
+      const value = values.shift();
+      if (typeof value === 'string') {
+        return `'${value.replace(/'/g, "''")}'`; // 转义单引号
+      } else if (value instanceof Date) {
+        return `'${value.toISOString().slice(0, 19).replace('T', ' ')}'`;
+      } else if (value === null) {
+        return 'NULL';
+      } else {
+        return value;
+      }
+    });
+    console.log("格式化后的查询语句:", formattedQuery);
     connection = await pool.getConnection();
-    const [rows] = await connection.execute(query, values);  // 使用参数化查询
+    const [rows] = await connection.execute(formattedQuery);  // 使用参数化查询
     return rows;
   } catch (error) {
     console.error("执行查询失败:", error);

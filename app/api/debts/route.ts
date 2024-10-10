@@ -1,13 +1,14 @@
 import { NextResponse } from "next/server";
 import { executeQuery } from "@/app/lib/db";
 
+
 // 处理 GET 请求
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const filter = searchParams.get("filter") || "";
-    const minAmount = searchParams.get("minAmount") || "0";
-    const maxAmount = searchParams.get("maxAmount") || "999999999";
+    const minAmount = Number(searchParams.get("minAmount") || 0);
+    const maxAmount = Number(searchParams.get("maxAmount") || 999999999);
     const startDate = searchParams.get("startDate") || "1970-01-01";
     const endDate = searchParams.get("endDate") || "9999-12-31";
     const page = Number(searchParams.get("page") ?? 1);

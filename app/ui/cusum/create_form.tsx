@@ -15,9 +15,7 @@ interface Option {
   price?: number;
 }
 
-interface CreateFormProps {
-  initialOrderCount: number;
-}
+
 
 interface Option {
   value: string;
@@ -26,12 +24,10 @@ interface Option {
   price?: number;
 }
 
-export default function CreateForm({
-  initialOrderCount
-}:CreateFormProps) {
+export default function CreateForm() {
   const [items, setItems] = useState([{ product: "", price: 0, quantity: 1 }]);
   const [productCategories, setProductCategories] = useState([]);
-
+  const [initialOrderCount, setInitialOrderCount] = useState(0);
   useEffect(() => {
     async function fetchProductCategories() {
       try {
@@ -42,6 +38,16 @@ export default function CreateForm({
         console.error('Error fetching product categories:', error);
       }
     }
+    async function fetchOrderCount() {
+      try {
+        const response = await fetch("http://localhost:3000/api/order-counter");
+        const { count } = await response.json();
+        setInitialOrderCount(count); 
+      } catch (error) {
+        console.error('Error fetching order count:', error);
+      }
+    }
+    fetchOrderCount();
     fetchProductCategories();
   }, []);
 

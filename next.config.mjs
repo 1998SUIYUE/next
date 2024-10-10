@@ -2,7 +2,7 @@
 
 const nextConfig = {
   experimental: {
-    // ppr: 'incremental',
+    ppr: 'incremental',
     
   },
   env: {
@@ -12,6 +12,8 @@ const nextConfig = {
     DB_NAME: process.env.DB_NAME,
     DB_PORT: process.env.DB_PORT,
   },
+  productionBrowserSourceMaps: true,
+  transpilePackages: ['antd', '@ant-design/cssinjs'],
 };
 
 export default nextConfig;

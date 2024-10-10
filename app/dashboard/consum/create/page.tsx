@@ -1,4 +1,4 @@
-import { getInitialOrderCount } from "@/app/lib/data";
+
 import CreateForm from "@/app/ui/cusum/create_form";
 import Breadcrumbs from "@/app/ui/debts/breadcrumbs";
 
@@ -37,8 +37,6 @@ export default async function Page() {
   //     },
   //   ];
 
-  const initialOrderCount:number = await getInitialOrderCount();
-
   return (
     <main>
       <Breadcrumbs
@@ -52,7 +50,7 @@ export default async function Page() {
         ]}
       />
 
-      <CreateForm initialOrderCount={initialOrderCount} />
+      <CreateForm/>
     </main>
   );
 }
