@@ -27,8 +27,9 @@ export const authConfig = {
         return false; // Redirect unauthenticated users to login page
       } else if (isLoggedIn) {
         console.log("--------用户已登录但不在仪表板页面，重定向到仪表板--------");
-        console.log("----------------重定向到----------", new URL('/dashboard', nextUrl));
-        return Response.redirect(new URL('/dashboard', nextUrl));
+        const dashboardUrl = new URL('/dashboard', nextUrl.href);
+        console.log("----------------重定向到----------", dashboardUrl.toString());
+        return Response.redirect(dashboardUrl);
       }
       console.log("--------允许访问非仪表板页面--------");
       return true;
