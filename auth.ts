@@ -87,10 +87,6 @@ export const { auth, signIn, signOut } = NextAuth({
       console.log("Token:", JSON.stringify(token, null, 2));
       return session;
     },
-    async redirect({ url, baseUrl }) {
-      console.log("Redirect callback", { url, baseUrl });
-      return url.startsWith(baseUrl) ? url : baseUrl;
-    },
   },
   events: {
     async signIn({ user, account, profile, isNewUser }) {
