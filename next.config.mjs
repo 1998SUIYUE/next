@@ -7,11 +7,11 @@ const nextConfig = {
     // 同时保持缓存的页面数
     pagesBufferLength: 2,
   },
-  webpack: (config, {  dev, isServer, defaultLoaders, webpack }) => {
-    // 注意：这会在控制台输出大量信息
-    config.infrastructureLogging = { debug: /webpack/, level: 'verbose' };
-    return config;
-  },
+  // webpack: (config, {  dev, isServer, defaultLoaders, webpack }) => {
+  //   // 注意：这会在控制台输出大量信息
+  //   config.infrastructureLogging = { debug: /webpack/, level: 'verbose' };
+  //   return config;
+  // },
   experimental: {
     ppr: 'incremental',
   },
@@ -26,6 +26,7 @@ const nextConfig = {
   },
   productionBrowserSourceMaps: true,
   transpilePackages: ['antd', '@ant-design/cssinjs'],
+  
 };
 
 export default nextConfig;
