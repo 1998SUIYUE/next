@@ -5,9 +5,9 @@ import { z } from "zod";
 
 import type { User } from "@/app/lib/definitions";
 import bcrypt from "bcrypt";
-console.log('NEXTAUTH_URL:', process.env.NEXTAUTH_URL);
-console.log('NODE_ENV:', process.env.NODE_ENV);
-console.log('NODE_secret:', process.env.NEXTAUTH_SECRET);
+console.log("NEXTAUTH_URL:", process.env.NEXTAUTH_URL);
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("NODE_secret:", process.env.NEXTAUTH_SECRET);
 // async function getUser(email: string): Promise<User | undefined> {
 //   try {
 //     const result = await executeQuery(`SELECT * FROM users WHERE email=?`, [
@@ -32,9 +32,21 @@ console.log('NODE_secret:', process.env.NEXTAUTH_SECRET);
 
 export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,
-  trustHost: true,  // 添加这一行
-  debug: true, 
-  useSecureCookies: false, 
+  trustHost: true, // 添加这一行
+  debug: true,
+  
+  useSecureCookies: false, // 如果不使用 HTTPS，设置为 false
+  cookies: {
+    sessionToken: {
+      name: `next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: false, // 如果不使用 HTTPS，设置为 false
+      },
+    },
+  },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   providers: [
     Credentials({
@@ -47,8 +59,8 @@ export const { auth, signIn, signOut } = NextAuth({
             const { email, password } = parsedCredentials.data;
             const res = await fetch("http://localhost:3000/api/users");
             const cv = await res.json();
-            const user = cv.data[0] as User
-            console.log("authorize user-info",user)
+            const user = cv.data[0] as User;
+            console.log("authorize user-info", user);
             if (!user) {
               console.log("用户未找到，邮箱:", email);
               return null;
@@ -99,5 +111,3 @@ export const { auth, signIn, signOut } = NextAuth({
     // 移除 signOut 事件处理器
   },
 });
-
-

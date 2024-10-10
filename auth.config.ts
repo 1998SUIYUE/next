@@ -23,9 +23,12 @@ export const authConfig = {
     },
     redirect({ url, baseUrl }) {
       console.log("Redirect in auth.config", { url, baseUrl });
-      if (url.startsWith(baseUrl)) return url;
-      else if (url.startsWith('http://47.109.95.152:3000')) return url;
-      return baseUrl;
+       if (url.startsWith(baseUrl) || url.startsWith('http://47.109.95.152:3000')) {
+         console.log("Redirecting to:", url);
+         return url;
+       }
+       console.log("Redirecting to baseUrl:", baseUrl);
+       return baseUrl;
     },
     
   },
