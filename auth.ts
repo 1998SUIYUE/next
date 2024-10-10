@@ -2,33 +2,33 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { authConfig } from "./auth.config";
 import { z } from "zod";
-import { executeQuery } from "./app/lib/db";
+
 import type { User } from "@/app/lib/definitions";
 import bcrypt from "bcrypt";
 console.log('NEXTAUTH_URL:', process.env.NEXTAUTH_URL);
 console.log('NODE_ENV:', process.env.NODE_ENV);
 console.log('NODE_secret:', process.env.NEXTAUTH_SECRET);
-async function getUser(email: string): Promise<User | undefined> {
-  try {
-    const result = await executeQuery(`SELECT * FROM users WHERE email=?`, [
-      email,
-    ]);
-    console.log("user---------------",result)
-    if (Array.isArray(result) && result.length > 0) {
-      const user: User = result[0] as User;
-      return user;
-    }
-    console.log("未找到用户，邮箱:", email);
-    return undefined;
-  } catch (error) {
-    console.error("获取用户失败:", error);
-    if (error instanceof Error) {
-      console.error("错误信息:", error.message);
-      console.error("错误堆栈:", error.stack);
-    }
-    throw new Error("获取用户失败");
-  }
-}
+// async function getUser(email: string): Promise<User | undefined> {
+//   try {
+//     const result = await executeQuery(`SELECT * FROM users WHERE email=?`, [
+//       email,
+//     ]);
+//     console.log("user---------------",result)
+//     if (Array.isArray(result) && result.length > 0) {
+//       const user: User = result[0] as User;
+//       return user;
+//     }
+//     console.log("未找到用户，邮箱:", email);
+//     return undefined;
+//   } catch (error) {
+//     console.error("获取用户失败:", error);
+//     if (error instanceof Error) {
+//       console.error("错误信息:", error.message);
+//       console.error("错误堆栈:", error.stack);
+//     }
+//     throw new Error("获取用户失败");
+//   }
+// }
 
 export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,
@@ -44,7 +44,10 @@ export const { auth, signIn, signOut } = NextAuth({
             .safeParse(credentials);
           if (parsedCredentials.success) {
             const { email, password } = parsedCredentials.data;
-            const user = await getUser(email);
+            const res = await fetch("http://localhost:3000/api/users");
+            const cv = await res.json();
+            const user = cv.data[0] as User
+            console.log("authorize user-info",user)
             if (!user) {
               console.log("用户未找到，邮箱:", email);
               return null;
