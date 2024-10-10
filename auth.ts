@@ -52,7 +52,6 @@ export const { auth, signIn, signOut } = NextAuth({
               console.log("用户未找到，邮箱:", email);
               return null;
             }
-
             const passwordsMatch = await bcrypt.compare(
               password,
               user.password
@@ -87,6 +86,10 @@ export const { auth, signIn, signOut } = NextAuth({
       console.log("Session:", JSON.stringify(session, null, 2));
       console.log("Token:", JSON.stringify(token, null, 2));
       return session;
+    },
+    async redirect({ url, baseUrl }) {
+      console.log("Redirect callback", { url, baseUrl });
+      return url.startsWith(baseUrl) ? url : baseUrl;
     },
   },
   events: {
