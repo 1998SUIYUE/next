@@ -8,6 +8,12 @@ import bcrypt from "bcrypt";
 console.log("NEXTAUTH_URL:", process.env.NEXTAUTH_URL_INTERNAL);
 console.log("NODE_ENV:", process.env.NODE_ENV);
 console.log("ecret:", process.env.NEXTAUTH_SECRET);
+console.log('NextAuth configuration:', JSON.stringify(authConfig, null, 2));
+console.log('Environment variables:', {
+  NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+  NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET ? 'Set' : 'Not set',
+  NODE_ENV: process.env.NODE_ENV
+});
 // async function getUser(email: string): Promise<User | undefined> {
 //   try {
 //     const result = await executeQuery(`SELECT * FROM users WHERE email=?`, [
