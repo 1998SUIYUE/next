@@ -14,6 +14,8 @@ export const pool = mysql.createPool({
 export async function executeQuery(query: string, values: any[] = []) {
   let connection;
   try {
+    console.error("查询语句:", query);
+    console.error("查询参数:", values);
     const formattedQuery = query.replace(/\?/g, () => {
       const value = values.shift();
       if (typeof value === "string") {
@@ -32,8 +34,7 @@ export async function executeQuery(query: string, values: any[] = []) {
     return rows;
   } catch (error) {
     console.error("执行查询失败:", error);
-    console.error("查询语句:", query);
-    console.error("查询参数:", values);
+    
     throw error;
   } finally {
     if (connection) {
