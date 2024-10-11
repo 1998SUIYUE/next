@@ -1,3 +1,4 @@
+
 import { Suspense } from 'react';
 import { getDailyConsumption, getTodaySales, getMonthSales, getUpcomingDebts, getOverdueDebts } from '@/app/lib/data';
 import BarChart from '@/app/ui/dashboard/barChart';
@@ -23,6 +24,7 @@ interface Debt {
 }
 
 async function SalesStatistics() {
+  
   const todaySales = await getTodaySales();
   const monthSales = await getMonthSales();
   const chartData = await getDailyConsumption(new Date());
@@ -103,7 +105,7 @@ async function DebtLists() {
   );
 }
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-bold">销售统计</h1>

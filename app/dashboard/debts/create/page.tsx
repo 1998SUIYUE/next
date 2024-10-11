@@ -3,7 +3,7 @@ import Form from '@/app/ui/debts/create-form';
 import Breadcrumbs from '@/app/ui/debts/breadcrumbs';
 import { DebtsCreateFormSkeleton } from '@/app/ui/skeletons';
 
-export default function Page() {
+export default async function Page() {
   return (
     <main>
       <Breadcrumbs
