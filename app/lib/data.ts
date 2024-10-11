@@ -102,7 +102,7 @@ export async function getOverdueDebts() {
 
 export async function getProductCategories() {
   try {
-    const response = await fetch("http://47.109.95.152:3000/api/products/categories", {
+    const response = await fetch(`${process.env.NEXTAUTH_URL_INTERNAL}/api/products/categories`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -117,7 +117,7 @@ export async function getProductCategories() {
 }
 export async function getInitialOrderCount() {  
   try {
-    const response = await fetch("http://47.109.95.152:3000/api/order-counter", {
+    const response = await fetch(`${process.env.NEXTAUTH_URL_INTERNAL}/api/order-counter`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

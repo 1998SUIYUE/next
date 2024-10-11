@@ -53,7 +53,7 @@ export const { auth, signIn, signOut } = NextAuth({
             .safeParse(credentials);
           if (parsedCredentials.success) {
             const { email, password } = parsedCredentials.data;
-            const res = await fetch("http://47.109.95.152:3000/api/users");
+            const res = await fetch(`${process.env.NEXTAUTH_URL_INTERNAL}/api/users`);
             const cv = await res.json();
             const user = cv.data[0] as User;
             console.log("authorize user-info", user);

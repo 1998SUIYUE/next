@@ -167,6 +167,7 @@ export async function POST(req: Request) {
       }
     );
   } finally {
-    if (conn) await conn.release();
+    if (conn) 
+       conn.release();
   }
 }

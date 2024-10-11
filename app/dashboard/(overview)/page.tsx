@@ -42,14 +42,14 @@ async function SalesStatistics() {
       <Statistic
         title="今日销售额"
         value={todaySales}
-        precision={2}
+        
         prefix={todayGrowthRate > 0 ? 'up' : 'down'}
         valueStyle={{ color: todayGrowthRate > 0 ? '#cf1322' : '#3f8600' }}
       />
       <Statistic
         title="当月总销售额"
         value={monthSales}
-        precision={2}
+        
         prefix={monthGrowthRate > 0 ? 'up' : 'down'}
         valueStyle={{ color: monthGrowthRate > 0 ? '#cf1322' : '#3f8600' }}
       />

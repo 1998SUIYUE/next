@@ -24,7 +24,7 @@ export default function EditProductForm({ product }: { product: ProductTable }) 
   useEffect(() => {
     async function fetchCategories() {
       try {
-        const response = await fetch('http://47.109.95.152:3000/api/products/categories');
+        const response = await fetch(`${process.env.NEXTAUTH_URL_INTERNAL}/api/products/categories`);
         if (response.ok) {
           const data = await response.json();
           setCategories(data.data);

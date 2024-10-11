@@ -31,7 +31,7 @@ export default function CreateForm() {
   useEffect(() => {
     async function fetchProductCategories() {
       try {
-        const response = await fetch("http://47.109.95.152:3000/api/products/categories");
+        const response = await fetch(`${process.env.NEXTAUTH_URL_INTERNAL}/api/products/categories`);
         const { data } = await response.json();
         setProductCategories(data);
       } catch (error) {
@@ -40,7 +40,7 @@ export default function CreateForm() {
     }
     async function fetchOrderCount() {
       try {
-        const response = await fetch("http://47.109.95.152:3000/api/order-counter");
+        const response = await fetch(`${process.env.NEXTAUTH_URL_INTERNAL}/api/order-counter`);
         const { count } = await response.json();
         setInitialOrderCount(count); 
       } catch (error) {

@@ -54,7 +54,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
   }
 
   try {
-    const response = await fetch("http://47.109.95.152:3000/api/debts", {
+    const response = await fetch(`${process.env.NEXTAUTH_URL_INTERNAL}/api/debts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -78,7 +78,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
 
 export async function deleteInvoice(id: string) {
   try {
-    const response = await fetch(`http://47.109.95.152:3000/api/debts/${id}`, {
+    const response = await fetch(`${process.env.NEXTAUTH_URL_INTERNAL}/api/debts/${id}`, {
       method: "DELETE",
     });
     if (!response.ok) {
@@ -128,7 +128,7 @@ export async function updateDebt(
   }
 
   try {
-    const response = await fetch(`http://47.109.95.152:3000/api/debts/${id}`, {
+    const response = await fetch(`${process.env.NEXTAUTH_URL_INTERNAL}/api/debts/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -184,7 +184,7 @@ export async function updateProduct(
   const { name, category, price, store } = validatedFields.data;
 
   try {
-    const response = await fetch(`http://47.109.95.152:3000/api/products/${id}`, {
+    const response = await fetch(`${process.env.NEXTAUTH_URL_INTERNAL}/api/products/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -211,7 +211,7 @@ export async function updateProduct(
 
 export async function deleteProduct(id: string) {
   try {
-    const response = await fetch(`http://47.109.95.152:3000/api/products/${id}`, {
+    const response = await fetch(`${process.env.NEXTAUTH_URL_INTERNAL}/api/products/${id}`, {
       method: "DELETE",
     });
 
@@ -257,7 +257,7 @@ export async function createProduct(prevState: State, formData: FormData) {
   const { name, category, price, store } = validatedFields.data;
 
   try {
-    const response = await fetch("http://47.109.95.152:3000/api/products", {
+    const response = await fetch(`${process.env.NEXTAUTH_URL_INTERNAL}/api/products`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -286,7 +286,7 @@ export async function createProduct(prevState: State, formData: FormData) {
 }
 export async function deleteConsum(id: string) {
   try {
-    const response = await fetch(`http://47.109.95.152:3000/api/cusum/${id}`, {
+    const response = await fetch(`${process.env.NEXTAUTH_URL_INTERNAL}/api/cusum/${id}`, {
       method: "DELETE",
     });
 
@@ -313,7 +313,7 @@ interface OrderData {
 export async function createorders(orderData: OrderData) {
   try {
     // 发送订单数据到服务器
-    const response = await fetch("http://47.109.95.152:3000/api/orders", {
+    const response = await fetch(`${process.env.NEXTAUTH_URL_INTERNAL}/api/orders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -326,7 +326,7 @@ export async function createorders(orderData: OrderData) {
     }
 
     // 订单提交成功，增加计数
-    const counterResponse = await fetch("http://47.109.95.152:3000/api/order-counter", { method: "POST" });
+    const counterResponse = await fetch(`${process.env.NEXTAUTH_URL_INTERNAL}/api/order-counter`, { method: "POST" });
     
     if (!counterResponse.ok) {
       throw new Error("更新订单计数失败");

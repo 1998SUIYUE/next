@@ -6,7 +6,7 @@ import { Suspense } from "react";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
-  const res = await fetch(`http://47.109.95.152:3000/api/products/${id}`, {
+  const res = await fetch(`${process.env.NEXTAUTH_URL_INTERNAL}/api/products/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
