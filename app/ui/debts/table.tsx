@@ -66,7 +66,7 @@ export default function InvoicesTable({
       }
       setLoading(false);
       fetch(
-        `${process.env.NEXTAUTH_URL_INTERNAL}/api/debts?filter=${query}&page=${currentPage}&minAmount=${minAmount}&maxAmount=${maxAmount}&startDate=${startDate}&endDate=${endDate}`
+        `${process.env.NEXT_PUBLIC_API_URL}/api/debts?filter=${query}&page=${currentPage}&minAmount=${minAmount}&maxAmount=${maxAmount}&startDate=${startDate}&endDate=${endDate}`
       )
         .then((res) => {
           if (!res.ok) {

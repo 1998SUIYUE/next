@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
-  const res = await fetch(`${process.env.NEXTAUTH_URL_INTERNAL}/api/debts/${id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/debts/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

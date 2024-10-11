@@ -42,7 +42,7 @@ export default function ProductsTable({
       }
       //不允许加载
       setLoading(false);
-      fetch(`${process.env.NEXTAUTH_URL_INTERNAL}/api/products?filter=${query}&page=${currentPage}`)
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products?filter=${query}&page=${currentPage}`)
         .then((res) => {
           if (!res.ok) {
             throw new Error(`错误: ${res.status}`);

@@ -41,7 +41,7 @@ export default function OrdersTable({
     const loadOrders = () => {
       if (!loading) return;
       setLoading(false);
-      fetch(`${process.env.NEXTAUTH_URL_INTERNAL}/api/orders?filter=${query}&page=${currentPage}`)
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/orders?filter=${query}&page=${currentPage}`)
         .then((res) => {
           if (!res.ok) {
             throw new Error(`错误: ${res.status}`);
