@@ -8,6 +8,7 @@ export const pool = mysql.createPool({
   port: Number(process.env.DB_PORT),
   connectionLimit: 100,
   queueLimit: 0,
+  
 });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
